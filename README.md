@@ -25,8 +25,8 @@ I am a third-year B.Tech. student majoring in Engineering Physics at IIT Roorkee
 
 ## Education
 
+- **3rd Year**
 - **B.Tech. in Engineering Physics** - IIT Roorkee
-- **M.Tech. in Hydro and Renewable Energy (HRE)** - IIT Roorkee
 
 ## Courses & Workshops
 
