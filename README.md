@@ -2,6 +2,10 @@
 
 This is an interactive portfolio website featuring a Gemini-powered AI chatbot that can answer questions about the portfolio owner's skills, experience, and projects.
 
+## Visit my Portfolio
+
+Check out my [Portfolio Website](https://adarshukla.netlify.app/) to learn more about my projects and experience.
+
 ## Features
 
 - Responsive design for desktop and mobile devices
