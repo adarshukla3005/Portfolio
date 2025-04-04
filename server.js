@@ -8,6 +8,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ALTERNATIVE_PORTS = [3001, 3002, 3003, 8080, 8081]; // Alternative ports to try
 
 // Middleware
 app.use(cors());
@@ -137,9 +138,28 @@ app.all('/api/*', (req, res) => {
   res.status(200).send('This API endpoint is handled by Netlify Functions in production.');
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Visit http://localhost:${PORT} to view the site`);
-  console.log(`Netlify Functions are simulated at /.netlify/functions/`);
-}); 
+// Function to start the server with port fallback
+function startServer(port, attemptIndex = 0) {
+  const server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+    console.log(`Visit http://localhost:${port} to view the site`);
+    console.log(`Netlify Functions are simulated at /.netlify/functions/`);
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is already in use, trying another port...`);
+      if (attemptIndex < ALTERNATIVE_PORTS.length) {
+        // Try the next alternative port
+        startServer(ALTERNATIVE_PORTS[attemptIndex], attemptIndex + 1);
+      } else {
+        console.error('All ports are in use. Please close some applications and try again.');
+        process.exit(1);
+      }
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
+  });
+}
+
+// Start server with port fallback
+startServer(PORT); 
