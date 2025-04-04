@@ -1,51 +1,38 @@
 require('dotenv').config();
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const fs = require('fs');
-const path = require('path');
+
+// Hardcoded information about Adarsh
+const adarshInfo = {
+  name: "Adarsh Shukla",
+  title: "AI/ML Engineer",
+  skills: ["Machine Learning", "Python", "JavaScript", "AI", "Natural Language Processing", "Computer Vision", "RAG"],
+  education: "B.Tech, Computer Science and Engineering",
+  experience: "3+ years of experience in AI and ML development",
+  projects: [
+    {
+      name: "Multiple PDF Chatbot",
+      description: "A RAG-based chatbot that can answer questions based on multiple PDF documents."
+    },
+    {
+      name: "Cold Calling Agent Chatbot",
+      description: "An AI-powered chatbot designed to assist with cold calling."
+    }
+  ],
+  about: "Experienced AI/ML Engineer specializing in building intelligent applications with a strong focus on RAG (Retrieval-Augmented Generation) systems."
+};
 
 // Initialize Google Generative AI (Gemini)
 let geminiModel;
 try {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "YOUR_GEMINI_API_KEY");
-  geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.warn("GEMINI_API_KEY is not set in environment variables");
+  } else {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  }
 } catch (error) {
   console.error("Error initializing Gemini client:", error.message);
-}
-
-// Hardcoded fallback information in case file reading fails
-const fallbackInfo = {
-  name: "Adarsh Shukla",
-  title: "AI/ML Engineer",
-  skills: "Machine Learning, Python, JavaScript, AI, Natural Language Processing, Computer Vision, RAG",
-  education: "B.Tech, Computer Science and Engineering",
-  experience: "3+ years of experience in AI and ML development"
-};
-
-// Load content from files
-let resumeContent = '';
-let cvContent = '';
-
-try {
-  const resumePath = path.join(__dirname, '../../adarsh_resume.md');
-  if (fs.existsSync(resumePath)) {
-    resumeContent = fs.readFileSync(resumePath, 'utf8');
-  } else {
-    console.log('Resume file not found, using fallback info');
-    resumeContent = JSON.stringify(fallbackInfo);
-  }
-  
-  const cvPath = path.join(__dirname, '../../cv_extracted.txt');
-  if (fs.existsSync(cvPath)) {
-    cvContent = fs.readFileSync(cvPath, 'utf8');
-  } else {
-    console.log('CV file not found, using fallback info');
-    cvContent = JSON.stringify(fallbackInfo);
-  }
-} catch (error) {
-  console.error("Error loading content:", error);
-  // Use fallback information
-  resumeContent = JSON.stringify(fallbackInfo);
-  cvContent = JSON.stringify(fallbackInfo);
 }
 
 // Function to convert markdown to HTML
@@ -112,17 +99,16 @@ exports.handler = async function(event, context) {
       };
     }
 
-    // Create system prompt with CV and resume content
-    const systemPrompt = `You are an AI assistant for Adarsh Shukla's portfolio website. You should answer questions about Adarsh based on his CV and resume. Be helpful, concise, and professional.
+    // Create system prompt with hardcoded information
+    const systemPrompt = `You are an AI assistant for Adarsh Shukla's portfolio website. You should answer questions about Adarsh based on this information. Be helpful, concise, and professional.
     
     Feel free to use Markdown formatting in your responses:
     - Use **text** for bold
     - Use *text* for italics
     - Use bullet lists with - to organize information
     
-    Resume: ${resumeContent}
-    
-    CV information: ${cvContent}
+    Information about Adarsh:
+    ${JSON.stringify(adarshInfo, null, 2)}
     
     If you don't know the answer to a question, politely say so rather than making up information.`;
 

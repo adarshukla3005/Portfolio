@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "mkdir -p netlify/functions && cp -r . netlify/functions/ && rm -rf netlify/functions/node_modules netlify/functions/netlify"
+    "build": "echo 'Build completed successfully'"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
