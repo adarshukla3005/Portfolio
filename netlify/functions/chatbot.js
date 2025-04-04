@@ -48,6 +48,26 @@ try {
   cvContent = JSON.stringify(fallbackInfo);
 }
 
+// Function to convert markdown to HTML
+function markdownToHtml(text) {
+  if (!text) return '';
+  
+  // Convert **bold** to <strong>bold</strong>
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Convert *italic* to <em>italic</em>
+  text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  
+  // Convert bullet points
+  text = text.replace(/^\s*-\s+(.*)$/gm, '<li>$1</li>');
+  text = text.replace(/<li>(.*)<\/li>/g, '<ul><li>$1</li></ul>');
+  
+  // Convert line breaks
+  text = text.replace(/\n/g, '<br>');
+  
+  return text;
+}
+
 // Simple fallback response function
 function getFallbackResponse(query) {
   const fallbackResponses = [
@@ -95,6 +115,11 @@ exports.handler = async function(event, context) {
     // Create system prompt with CV and resume content
     const systemPrompt = `You are an AI assistant for Adarsh Shukla's portfolio website. You should answer questions about Adarsh based on his CV and resume. Be helpful, concise, and professional.
     
+    Feel free to use Markdown formatting in your responses:
+    - Use **text** for bold
+    - Use *text* for italics
+    - Use bullet lists with - to organize information
+    
     Resume: ${resumeContent}
     
     CV information: ${cvContent}
@@ -114,11 +139,13 @@ exports.handler = async function(event, context) {
     });
     
     const response = result.response.text();
+    // Convert markdown formatting to HTML
+    const formattedResponse = markdownToHtml(response);
     
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        answer: response || getFallbackResponse(query)
+        answer: formattedResponse || getFallbackResponse(query)
       })
     };
   } catch (error) {

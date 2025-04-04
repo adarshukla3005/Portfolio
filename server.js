@@ -50,6 +50,24 @@ function getFallbackResponse(query) {
   return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
 }
 
+// Function to convert markdown to HTML
+function markdownToHtml(text) {
+  // Convert **bold** to <strong>bold</strong>
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Convert *italic* to <em>italic</em>
+  text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  
+  // Convert bullet points
+  text = text.replace(/^\s*-\s+(.*)$/gm, '<li>$1</li>');
+  text = text.replace(/<li>(.*)<\/li>/g, '<ul><li>$1</li></ul>');
+  
+  // Convert line breaks
+  text = text.replace(/\n/g, '<br>');
+  
+  return text;
+}
+
 // Simple API endpoint to test if server is running
 app.get('/api/status', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
@@ -104,6 +122,11 @@ app.post('/.netlify/functions/chatbot', async (req, res) => {
     
     const systemPrompt = `You are an AI assistant for Adarsh Shukla's portfolio website. You should answer questions about Adarsh based on his CV and resume. Be helpful, concise, and professional.
     
+    Feel free to use Markdown formatting in your responses:
+    - Use **text** for bold
+    - Use *text* for italics
+    - Use bullet lists with - to organize information
+    
     Resume: ${resumeContent}
     
     CV information: ${cvContent}
@@ -123,7 +146,10 @@ app.post('/.netlify/functions/chatbot', async (req, res) => {
     });
     
     const response = result.response.text();
-    res.json({ answer: response || getFallbackResponse(query) });
+    // Convert markdown formatting to HTML before sending
+    const formattedResponse = markdownToHtml(response);
+    
+    res.json({ answer: formattedResponse || getFallbackResponse(query) });
     
   } catch (error) {
     console.error("Error processing chatbot request:", error);
