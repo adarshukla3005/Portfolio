@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -22,7 +23,8 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
-
+    <!-- Add Font Awesome for enhanced icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 
@@ -57,46 +59,165 @@
 }
 
 
-/* Animation styles */
+/* Updated typing animation styles */
+.typing-container {
+  position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-block;
+}
+
 #typing-animation {
   position: relative;
   font-size: 30px;
   font-weight: bold;
   color: rgb(255, 255, 255);
-  overflow: hidden;
+  display: inline-block;
   white-space: nowrap;
-  animation: typing 3s steps(20, end) infinite;
+  margin: 0;
+  vertical-align: middle;
 }
 
-#typing-animation:before {
-  content: "";
-  /* position: absolute; */
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 40px;
+  background-color: #fff;
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Particle background */
+#particles-js, #footer-particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #ccc;
-  animation: typing-cursor 0.5s ease-in-out infinite;
+  z-index: 0;
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+/* Mouse follower effect */
+.mouse-follower {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ffbd39;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, border 0.3s ease;
+  z-index: 9999;
+  opacity: 0.6;
 }
 
-@keyframes typing-cursor {
-  from {
-    width: 5px;
-  }
-  to {
-    width: 0;
-  }
+/* Tech stack showcase */
+.tech-stack-showcase {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 5;
 }
 
+.tech-stack-items {
+  display: flex;
+  animation: scrollTech 30s linear infinite;
+  gap: 30px;
+  padding: 10px 30px;
+  width: max-content; /* Ensure it takes as much width as needed */
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin: 0 15px;
+}
+
+.tech-item i {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+/* Change the animation to make it scroll continuously from right to left */
+@keyframes scrollTech {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 15px)); } /* Half width accounting for margins */
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 189, 57, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(30deg);
+}
+
+/* Social icons animation */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.social-icon:hover {
+  transform: translateY(-5px);
+  background: #ffbd39;
+  box-shadow: 0 5px 15px rgba(255, 189, 57, 0.4);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode .navbar {
+  background-color: #121212 !important;
+}
+
+body.dark-mode .overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
 
 /* project image zoom effect */
 
@@ -109,6 +230,314 @@
   transform: scale(1.1);
 }
 
+.skill-bar {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.skill-bar h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.progress-wrapper {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-value {
+  background-color: #ffbd39;
+  height: 100%;
+  border-radius: 5px;
+  position: relative;
+  transition: width 1.5s ease-in-out;
+}
+
+.resume-download-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 189, 57, 0.3);
+}
+
+.resume-download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 189, 57, 0.4);
+  color: white;
+}
+
+.resume-download-btn i {
+  margin-right: 8px;
+}
+
+.card {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.card-text {
+  flex-grow: 1;
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #444;
+}
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px 15px 0 0;
+}
+
+.project-image img {
+  transition: transform 0.5s ease;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+  color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.github-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  margin-top: 0;
+  transition: all 0.3s ease;
+  padding: 0.4rem 0.75rem;
+}
+
+.github-btn:hover {
+  background-color: #24292e;
+  transform: translateY(-2px);
+  color: white;
+}
+
+.btn-group {
+  gap: 0.5rem;
+}
+
+.text-muted {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.text-muted.mb-2 {
+  margin-bottom: 0.5rem !important;
+  display: block;
+  color: #6c757d !important;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.d-flex.justify-content-end {
+  margin-top: 0.25rem;
+}
+
+/* Add project tag styling */
+.project-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Animation for skill bars */
+@keyframes skillAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-skill {
+  animation: skillAnimation 1.5s ease-out forwards;
+}
+
+/* Improve chatbot styling */
+.chatbot-floating-button {
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+  box-shadow: 0 5px 20px rgba(255, 189, 57, 0.4);
+}
+
+.chatbot-header {
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+}
+
+.user-message {
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+  color: white;
+}
+
+.chatbot-submit {
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+}
+
+/* Project section header styling */
+.project-filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.project-filters a {
+  padding: 8px 16px;
+  border-radius: 25px;
+  color: #444;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid #eee;
+  text-decoration: none;
+}
+
+.project-filters a:hover, .project-filters a.active {
+  background: linear-gradient(135deg, #ffbd39 0%, #ff9b28 100%);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 189, 57, 0.3);
+}
+
+/* Project section animation */
+.ftco-animate.fadeInUp {
+  animation-duration: 0.7s;
+}
+
+/* Tech stack pills styling */
+.tech-stack-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tech-pill {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    border-radius: 30px;
+    color: #212529;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+}
+
+.tech-pill:hover, .tech-pill.active {
+    background-color: #ffbd39;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments for tech pills */
+@media (max-width: 768px) {
+    .tech-pill {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .tech-stack-filters {
+        gap: 8px;
+    }
+}
+
+/* Footer styling with particle background */
+.ftco-footer {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  padding: 6em 0;
+}
+
+.ftco-footer a {
+  color: #ffbd39;
+  transition: all 0.3s ease;
+}
+
+.ftco-footer a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.ftco-footer .icon-heart {
+  color: #ffbd39;
+}
 
 </style>
 
@@ -116,6 +545,14 @@
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	  
+	  
+    <!-- Mouse follower -->
+    <div class="mouse-follower"></div>
+    
+    <!-- Theme toggle button -->
+    <div class="theme-toggle">
+      <i class="fas fa-sun"></i>
+    </div>
 	  
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
@@ -131,73 +568,231 @@
 	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
 	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
 	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+              <li class="nav-item"><a href="#" class="nav-link" id="chatbot-toggle"><span>Chat</span></a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
 	  <section id="home-section" class="hero">
+		  <!-- Particle background -->
+		  <div id="particles-js"></div>
+		  
 		  <div class="home-slider  owl-carousel">
 	       <div class="slider-item ">
 	      	<div class="overlay"></div>
 	         <div class="container">
 	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_1.png);">
-	          	 <div class="overlay"></div>
-	          	</div>
-		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+              <div class="one-third js-fullheight order-md-last img" 
+                style="position: relative;
+                     width: 750px; 
+                     height: 750px;
+                     z-index: 1;
+                     overflow: hidden;">
+                <div class="ai-brain-model">
+                  <div class="neural-network-container">
+                    <canvas id="neural-network-animation" width="750" height="750"></canvas>
+                  </div>
+                  <div class="holographic-overlay"></div>
+                </div>
+                <div class="overlay"></div>
+              </div>
+		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }" style="z-index: 1;">
 		          	<div class="text">
 		          		<span class="subheading">Hello!</span>
 			            <h1 class="mb-4 mt-3">I'm <span>Adarsh Shukla</span></h1>
 
-						<!-- Element to contain animated typing -->
-						<span id="typing-animation"></span>
+						<!-- Updated typing animation with cursor -->
+						<div class="typing-container">
+							<div id="typing-animation"></div>
+							<span class="cursor"></span>
+						</div>
 
 						<script>
-
-						// Initialize the typing animation
+						// Updated typing animation script
 						const typingAnimationElement = document.getElementById('typing-animation');
-
+						
 						// Create an array of typing text
 						const typingTexts = [
-						'Artificial Intelligence  ',
-						'Machine Learning  ',
-						'Finance  ',
-						'Competitive Programmer  ',
+							'Artificial Intelligence',
+							'Machine Learning',
+							'Finance',
+							'Competitive Programmer',
 						];
-
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 180); // Increase the delay to slow down the typing animation
+						
+						let currentTextIndex = 0;
+						let isDeleting = false;
+						let text = '';
+						let charIndex = 0;
+						let typingSpeed = 100;
+						let pauseDuration = 1000;
+						
+						function type() {
+							const currentText = typingTexts[currentTextIndex];
+							
+							if (isDeleting) {
+								// Deleting mode
+								text = currentText.substring(0, charIndex - 1);
+								charIndex--;
+								typingSpeed = 50; // Faster when deleting
+							} else {
+								// Typing mode
+								text = currentText.substring(0, charIndex + 1);
+								charIndex++;
+								typingSpeed = 100; // Normal typing speed
+							}
+							
+							typingAnimationElement.textContent = text;
+							
+							// If complete text is typed
+							if (!isDeleting && charIndex === currentText.length) {
+								isDeleting = true;
+								typingSpeed = pauseDuration; // Pause before deleting
+							} 
+							// If all text is deleted
+							else if (isDeleting && charIndex === 0) {
+								isDeleting = false;
+								currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
+							}
+							
+							setTimeout(type, typingSpeed);
 						}
-
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-						}, text.length * 180);
-						}
-
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
-
+						
+						// Start the typing animation
+						setTimeout(type, 1000);
 						</script>
 
 						<br>
 						<br>
-			            <h2>AI/ ML Engineer</h2>
+			            <h2>Student at IIT Roorkee</h2>
 						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
 						<!-- <br> -->
-			            <p><a href="https://www.linkedin.com/in/adarsh-shukla30/" class="btn btn-primary py-3 px-3">LinkedIn</a>
+                        
+                        <!-- Social media icons with animation -->
+                        <div class="social-icons">
+                          <a href="https://www.linkedin.com/in/adarsh-shukla30/" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                          </a>
+                          <a href="https://github.com/adarshukla3005" class="social-icon">
+                            <i class="fab fa-github"></i>
+                          </a>
+                          <a href="https://x.com/AdarshSh30" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                          </a>
+                          <a href="mailto:adarshukla3005@gmail.com" class="social-icon">
+                            <i class="fas fa-envelope"></i>
+                          </a>
+                        </div>
+                        
+			            <p class="mt-4"><a href="https://www.linkedin.com/in/adarsh-shukla30/" class="btn btn-primary py-3 px-3">LinkedIn</a>
 							<a href="https://github.com/adarshukla3005" class="btn btn-white btn-outline-secondary py-3 px-4">My works</a></p>
 		            </div>
 		          </div>
 	        	</div>
 	        </div>
 	      </div>
+		</div>
+		
+		<!-- Tech stack showcase at the bottom -->
+		<div class="tech-stack-showcase">
+		  <div class="tech-stack-items">
+			<div class="tech-item">
+			  <i class="fab fa-python"></i>
+			  <span>Python</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-js"></i>
+			  <span>JavaScript</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-react"></i>
+			  <span>React</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-html5"></i>
+			  <span>HTML</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-database"></i>
+			  <span>MongoDB</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-aws"></i>
+			  <span>AWS</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-docker"></i>
+			  <span>Docker</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-brain"></i>
+			  <span>TensorFlow</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-fire"></i>
+			  <span>PyTorch</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-chart-line"></i>
+			  <span>Data Science</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-code-branch"></i>
+			  <span>Git</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-robot"></i>
+			  <span>AI</span>
+			</div>
+			<!-- Duplicate items for continuous scrolling -->
+			<div class="tech-item">
+			  <i class="fab fa-python"></i>
+			  <span>Python</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-js"></i>
+			  <span>JavaScript</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-react"></i>
+			  <span>React</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-node-js"></i>
+			  <span>Node.js</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-database"></i>
+			  <span>MongoDB</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-aws"></i>
+			  <span>AWS</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fab fa-docker"></i>
+			  <span>Docker</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-brain"></i>
+			  <span>TensorFlow</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-fire"></i>
+			  <span>PyTorch</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-chart-line"></i>
+			  <span>Data Science</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-code-branch"></i>
+			  <span>Git</span>
+			</div>
+			<div class="tech-item">
+			  <i class="fas fa-robot"></i>
+			  <span>AI</span>
+			</div>
+		  </div>
 		</div>
     </section>
 
@@ -316,14 +911,9 @@
           <div class="col-md-10 heading-section text-center ftco-animate">
           	<h1 class="big big-2">Resume</h1>
             <h2 class="mb-4">Resume</h2>
-            <p>AI/ML Engineer with 2+ years of experience analyzing different technologies and developments. Working on different Industry level projects to gain expertise in Artificial Intelligence, machine learning algorithms and agentic workflows.</p>
+            <p>A brief overview of my education and work experience</p>
+            <a href="https://drive.google.com/file/d/15784PC_Z3ZbbBXSdKEAbEsmBjKQxL60S/view" class="resume-download-btn"><i class="icon-download"></i> Download Full Resume</a>
           </div>
-
-		</p><div class="row justify-content-center mt-5">
-		<div class="col-md-6 text-center ftco-animate">
-			<p><a href="https://drive.google.com/file/d/15784PC_Z3ZbbBXSdKEAbEsmBjKQxL60S/view?usp=sharing" class="btn btn-primary py-4 px-5">Resume</a></p>
-		</div>
-    	</div>
         </div>
 
 		<div class="row">
@@ -349,20 +939,38 @@
 
 				</div>
 
-				<div class="col-md-6">
+				<!-- <div class="col-md-6">
 					<div class="resume-wrap ftco-animate">
-						<span class="date">July 2024-Aug 2024 </span>
-						<h2>Financial Analyst Intern</h2>
-						<span class="position">Awesome Advertising</span>
+						<span class="date">May 2024-July 2024 </span>
+						<h2>Software Development Intern</h2>
+						<span class="position">DEFSYS Software Pvt. Ltd.</span>
 						<p class="mt-4">Awesome Advertising, a leading digital marketing firm, provides cutting-edge advertising solutions to enhance brand visibility. 
 							<ul>
-								<li>Developed a financial report generator utilizing Financial Modelling Prep API and stored data in CSV for further analysis, enhancing financial data management.</li>
-								<li>Designed and implemented RAG architecture using Langchain, Falcon 7B LLM, and Vector DB for efficient data handling and retrieval.</li>
+								<li>Built an AI assistant for demo scheduling, interview screening, and payment follow-ups using Flask, Streamlit,
+                  and Google Gemini AI, supporting voice and text interactions in Hinglish.</li>
+								<li>Integrated Google Calendar API for automated scheduling and Gmail SMTP for payment follow-ups, ensuring
+                  seamless communication. Developed a real-time AI interviewer that generates dynamic questions, conducts se-
+                  quential questioning, and evaluates responses.</li>
 								<li>Generated an in-depth financial report for MSFT, detailing FY2024 revenue of $0.245 trillion, improving business insights and decision-making.</li>
 							</ul>
 						</p>
 					</div>
 
+				</div> -->
+
+        <div class="col-md-6">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">July 2024-Aug 2024 </span>
+						<h2>Financial Analyst Intern</h2>
+						<span class="position">Awesome Advertising</span>
+						<p class="mt-4">Awesome Advertising, a leading digital marketing firm, provides cutting-edge AI solutions to enhance brand visibility. 
+							<ul>
+								<li>Developed a financial report generator utilizing Financial Modelling Prep API and stored data in CSV for further analysis.</li>
+								<li>Implemented RAG architecture using Langchain, OpenAI, and Vector DB for efficient data handling and retrieval.</li>
+								<li>Generated an in-depth financial report for multiple companies including MSFT, AAPL, GOOGL, etc. analyzing business insights.</li>
+							</ul>
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -399,72 +1007,152 @@
 
    
 
-<section class="ftco-section" id="project-section">
-  <div class="container">
-    <div class="row justify-content-center mb-5 pb-5">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <h1 class="big big-2">Projects</h1>
-        <h2 class="mb-4">Projects</h2>
-        <p>Below are the sample LLM, Langchain and Machine Learning projects.</p>
-      </div>
+<section class="ftco-section ftco-project" id="project-section">
+    <div class="container">
+        <div class="row justify-content-center pb-5">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h1 class="big big-2">Projects</h1>
+                <h2 class="mb-4">My Projects</h2>
+                <p class="mb-5">Here are some of the notable projects I've worked on in AI, Machine Learning, and Full Stack Development</p>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Project 1 -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="project-image">
+                        <span class="project-tag">AI/ML</span>
+                        <img src="images/pdf.png" class="card-img-top" alt="Multiple PDF Chatbot">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Multiple PDF Chatbot</h5>
+                        <p class="card-text">Comprehensive analysis of stock market data using technical indicators and algorithms to identify trading opportunities.</p>
+                        <small class="text-muted mb-2 d-block">PyPDF2, Google Gemini, FAISS, RAG</small>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group">
+                                <a href="https://github.com/adarshukla3005/Multiple-PDF-Chatbot" class="btn btn-sm github-btn">
+                                  <i class="icon-github mr-1"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="project-image">
+                        <span class="project-tag">AI agent</span>
+                        <img src="images/agent.jpeg" class="card-img-top" alt="Cold Calling Agent Chatbot">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Cold Calling Agent Chatbot</h5>
+                        <p class="card-text">An AI-powered sales agent that can make cold calls, understand customer responses, and follow sales scripts with natural conversation.</p>
+                        <small class="text-muted mb-2 d-block">Flask, Streamlit, Google Gemini API</small>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group">
+                                <a href="https://github.com/adarshukla3005/Cold_Calling_Agent_Chatbot" class="btn btn-sm github-btn">
+                                  <i class="icon-github mr-1"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="col-md-4">
+              <div class="card mb-4">
+                  <div class="project-image">
+                      <span class="project-tag">Finance</span>
+                      <img src="images/Finance.jpg" class="card-img-top" alt="Financial Report Generator">
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">Financial Report Generator</h5>
+                      <p class="card-text">Automated tool that generates comprehensive financial reports from raw data, providing insights through visualizations and key metrics analysis.</p>
+                      <small class="text-muted mb-2 d-block">PrepAPI, Pandas, Matplotlib, Firecrawl API</small>
+                      <div class="d-flex justify-content-end">
+                          <div class="btn-group">
+                              <a href="https://github.com/adarshukla3005/Financial_Report_Generator" class="btn btn-sm github-btn">
+                                <i class="icon-github mr-1"></i> GitHub
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>            
+
+          <!-- Add spacing between rows -->
+          <div class="w-100 mb-5"></div>
+
+            <!-- Project 3 -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="project-image">
+                        <span class="project-tag">ML, NLP</span>
+                        <img src="images/proj_4.jpg" class="card-img-top" alt="Stock Sentiment Analysis">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Stock Sentiment Analysis</h5>
+                        <p class="card-text">Machine learning model that analyzes financial news and social media sentiment to predict stock price movements with high accuracy.</p>
+                        <small class="text-muted mb-2 d-block">Web Scraping, NLTK, Scikit-learn, Protfolio</small>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group">
+                                <a href="https://github.com/adarshukla3005/Stock_sentiment_analysis" class="btn btn-sm github-btn">
+                                  <i class="icon-github mr-1"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="project-image">
+                        <span class="project-tag">Deep Learning</span>
+                        <img src="images/proj_5.jpg" class="card-img-top" alt="Neural Style Transfer">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Neural Style Transfer</h5>
+                        <p class="card-text">Implementation of neural style transfer algorithms to apply artistic styles to images using deep learning techniques.</p>
+                        <small class="text-muted mb-2 d-block">Python, PyTorch, CNN, VGG19, GAN</small>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group">
+                                <a href="https://github.com/adarshukla3005/Neural_style_transfer" class="btn btn-sm github-btn">
+                                  <i class="icon-github mr-1"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="project-image">
+                        <span class="project-tag">Computer Vision</span>
+                        <img src="images/proj_8.png" class="card-img-top" alt="Image Enhancement">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Low-light Image Enhancement</h5>
+                        <p class="card-text">Deep learning model for enhancing extremely low-light images, improving visibility while preserving details and reducing noise.</p>
+                        <small class="text-muted mb-2 d-block">Python, TensorFlow, GAN, OpenCV</small>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group">
+                                <a href="https://github.com/adarshukla3005/Extreme_low_light_image_enhancement" class="btn btn-sm github-btn">
+                                  <i class="icon-github mr-1"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="https://github.com/adarshukla3005/Multiple-PDF-Chatbot" class="block-20 zoom-effect" style="background-image: url('images/projjjj.png');">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading"><a href="https://github.com/adarshukla3005/Multiple-PDF-Chatbot">Mutiple PDF Chatbot</a></h3>
-            <p>Developed a Multi-PDF Chatbot using the Gemini API with voice-to-text input, optimized with caching and vectorized embeddings for fast and accurate responses.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="https://github.com/adarshukla3005/Cold_Calling_Agent_Chatbot" class="block-20 zoom-effect" style="background-image: url('images/image.png');">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading"><a href="https://github.com/adarshukla3005/Cold_Calling_Agent_Chatbot">Cold Calling Agent Chatbot</a></h3>
-            <p>AI-powered cold-calling assistant that helps with demo scheduling, interview screening, and payment follow-ups.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="https://github.com/adarshukla3005/Stock_sentiment_analysis" class="block-20 zoom-effect" style="background-image: url('images/proj_4.jpg');">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading"><a href="https://github.com/adarshukla3005/Stock_sentiment_analysis">Stock Sentiment Analysis using Machine Learning</a></h3>
-            <p>Used machine learning and NLP to web scrape news headlines from Financial Websites and then plot ROC/AUC & BuySell curves.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="row mt-5">
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="https://github.com/adarshukla3005/Neural_style_transfer" class="block-20 zoom-effect" style="background-image: url('images/proj_5.jpg');">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading"><a href="https://github.com/adarshukla3005/Neural_style_transfer">Neural Style Transfer using Machine Learning</a></h3>
-            <p>Developed a ML model that takes contents and style image as input and gives an artistic stylized image.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="https://github.com/adarshukla3005/Extreme_low_light_image_enhancement" class="block-20 zoom-effect" style="background-image: url('images/proj_8.png');">
-          </a>
-          <div class="text mt-3 float-right d-block">
-            <h3 class="heading"><a href="https://github.com/adarshukla3005/Extreme_low_light_image_enhancement">Extreme Low light Image Enhancement</a></h3>
-            <p>Optimized a Python-based image enhancement model with OpenCV, BM3D, and weighted gamma correction.</p>
-          </div>
-        </div>
-      </div>
-      <!-- You can add a sixth project here if needed -->
-    </div>
-  </div>
 </section>
 
 	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
@@ -510,7 +1198,7 @@
 				<div class="row justify-content-center">
 					<div class="col-md-7 ftco-animate text-center">
 						<h2>More projects on<span> Github  </span> </h2>
-						<div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4>
+						<div class="heading"> <h4> I love to solve business problems &amp; explore new technologies </h4>
 						<br>
 						<p><a href="https://github.com/adarshukla3005" class="btn btn-primary py-3 px-5">GitHub</a></p>
 						</div>
@@ -585,7 +1273,7 @@
 					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/adarsh-shukla30/"><span class="icon-linkedin"></span></a></li>  
 					  <li class="ftco-animate"><a href="https://x.com/AdarshSh30"><span class="icon-twitter"></span></a></li>
 					  <li class="ftco-animate"><a href="https://www.facebook.com/adarshukla3005/"><span class="icon-facebook"></span></a></li>
-				      <li class="ftco-animate"><a href="https://www.instagram.com/adarsh_shukla30/"><span class="icon-instagram"></span></a></li>
+					  <li class="ftco-animate"><a href="https://www.instagram.com/adarsh_shukla30/"><span class="icon-instagram"></span></a></li>
 					</ul>
 				<br>
 		   </div>
@@ -596,12 +1284,16 @@
  
 	
     <footer class="ftco-footer ftco-section">
-		<div class="container">
+		<!-- Add particles background div -->
+		<div id="footer-particles-js"></div>
+		<div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 0;"></div>
+		
+		<div class="container" style="position: relative; z-index: 1;">
 		  <div class="row">
 			<div class="col-md-12 text-center">
   
 			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Portfolio is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://www.linkedin.com/in/adarsh-shukla30/" target="_blank">Adarsh Shukla</a>
 	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 			</div>
 		  </div>
@@ -610,7 +1302,7 @@
 
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
   <script src="js/jquery.min.js"></script>
@@ -628,5 +1320,393 @@
   
   <script src="js/main.js"></script>
     
+  <!-- Chatbot Interface -->
+  <div id="chatbot-container" class="chatbot-container">
+    <div class="chatbot-header">
+      <div class="chatbot-title">Portfolio Assistant</div>
+      <div class="chatbot-close" id="chatbot-close">×</div>
+    </div>
+    <div id="chatbot-messages" class="chatbot-messages">
+      <div class="message bot-message">
+        Hello! I'm your portfolio assistant. Ask me anything about Adarsh's skills, projects, or experience.
+      </div>
+    </div>
+    <div class="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="Ask something about Adarsh..." class="chatbot-input">
+      <button id="chatbot-submit" class="chatbot-submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Chat Button -->
+  <div id="chatbot-floating-button" class="chatbot-floating-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </div>
+
+  <!-- Add chatbot styles -->
+  <style>
+    .chatbot-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 400px;
+      height: 600px;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      display: none;
+      overflow: hidden;
+    }
+
+    .chatbot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background-color: #ffbd39;
+      color: #fff;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    .chatbot-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .chatbot-close {
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .chatbot-messages {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .message {
+      padding: 12px 16px;
+      border-radius: 18px;
+      max-width: 85%;
+      word-wrap: break-word;
+      color: #000;
+      font-size: 14px;
+    }
+
+    .bot-message {
+      background-color: #f1f1f1;
+      align-self: flex-start;
+      color: #000;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-message {
+      background-color: #ffbd39;
+      color: #000;
+      align-self: flex-end;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot-input-container {
+      display: flex;
+      padding: 15px;
+      border-top: 1px solid #f0f0f0;
+      background-color: white;
+    }
+
+    .chatbot-input {
+      flex-grow: 1;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 24px;
+      outline: none;
+      color: #000;
+      font-size: 14px;
+    }
+
+    .chatbot-input::placeholder {
+      color: #aaa;
+    }
+
+    .chatbot-submit {
+      background-color: #ffbd39;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .chatbot-submit:hover {
+      background-color: #e5a82e;
+      transform: scale(1.05);
+    }
+
+    .chatbot-submit svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .chatbot-floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #ffbd39;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .chatbot-floating-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .chatbot-floating-button svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .loading-message::after {
+      content: "...";
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { content: "."; }
+      33% { content: ".."; }
+      66% { content: "..."; }
+    }
+
+    @media (max-width: 500px) {
+      .chatbot-container {
+        width: 90%;
+        height: 80%;
+        bottom: 80px;
+        right: 5%;
+        border-radius: 16px;
+      }
+    }
+  </style>
+
+  <!-- Add chatbot JS -->
+  <script src="js/chatbot.js"></script>
+  
+  <!-- Add Particle.js library -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+  <!-- Custom JS for new features -->
+  <script>
+    // Initialize particles.js
+    document.addEventListener('DOMContentLoaded', function() {
+      // Function to initialize particles with same configuration
+      function initParticles(elementId) {
+        particlesJS(elementId, {
+          "particles": {
+            "number": {
+              "value": 80,
+              "density": {
+                "enable": true,
+                "value_area": 800
+              }
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "shape": {
+              "type": "circle",
+              "stroke": {
+                "width": 0,
+                "color": "#000000"
+              },
+            },
+            "opacity": {
+              "value": 0.5,
+              "random": false,
+              "anim": {
+                "enable": false,
+                "speed": 1,
+                "opacity_min": 0.1,
+                "sync": false
+              }
+            },
+            "size": {
+              "value": 3,
+              "random": true,
+              "anim": {
+                "enable": false,
+                "speed": 40,
+                "size_min": 0.1,
+                "sync": false
+              }
+            },
+            "line_linked": {
+              "enable": true,
+              "distance": 150,
+              "color": "#ffffff",
+              "opacity": 0.4,
+              "width": 1
+            },
+            "move": {
+              "enable": true,
+              "speed": 2,
+              "direction": "none",
+              "random": false,
+              "straight": false,
+              "out_mode": "out",
+              "bounce": false,
+              "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+              }
+            }
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+              "onhover": {
+                "enable": true,
+                "mode": "grab"
+              },
+              "onclick": {
+                "enable": true,
+                "mode": "push"
+              },
+              "resize": true
+            },
+            "modes": {
+              "grab": {
+                "distance": 140,
+                "line_linked": {
+                  "opacity": 1
+                }
+              },
+              "bubble": {
+                "distance": 400,
+                "size": 40,
+                "duration": 2,
+                "opacity": 8,
+                "speed": 3
+              },
+              "repulse": {
+                "distance": 200,
+                "duration": 0.4
+              },
+              "push": {
+                "particles_nb": 4
+              },
+              "remove": {
+                "particles_nb": 2
+              }
+            }
+          },
+          "retina_detect": true
+        });
+      }
+      
+      // Initialize particles for both home and footer
+      initParticles('particles-js');
+      initParticles('footer-particles-js');
+    });
+
+    // Mouse follower effect
+    document.addEventListener('DOMContentLoaded', function() {
+      const mouseFollower = document.querySelector('.mouse-follower');
+      
+      document.addEventListener('mousemove', function(e) {
+        mouseFollower.style.left = e.clientX + 'px';
+        mouseFollower.style.top = e.clientY + 'px';
+      });
+      
+      // Change size on hover over buttons
+      const buttons = document.querySelectorAll('a, button, .social-icon');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+          mouseFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+          mouseFollower.style.border = '1px solid #ffbd39';
+          mouseFollower.style.backgroundColor = 'rgba(255, 189, 57, 0.1)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          mouseFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+          mouseFollower.style.border = '2px solid #ffbd39';
+          mouseFollower.style.backgroundColor = 'transparent';
+        });
+      });
+    });
+    
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.querySelector('.theme-toggle');
+      const body = document.body;
+      
+      // Check for saved theme in localStorage
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+      
+      themeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+          themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    });
+    
+    // Add parallax effect on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        
+        // Parallax effect for the hero section
+        if (scrollPosition < 800) {
+          const heroSection = document.querySelector('#home-section');
+          heroSection.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+          
+          // Move particles with scroll
+          const particles = document.querySelector('#particles-js');
+          particles.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+        }
+      });
+    });
+  </script>
   </body>
 </html>

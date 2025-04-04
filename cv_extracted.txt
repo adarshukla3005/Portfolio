@@ -1,0 +1,89 @@
+ADARSH SHUKLA
+Third-year undergraduate student at IIT Roorkee
+Mob: +91 8707446780 | Email: adarshukla3005@gmail.com | LinkedIn: linkedin.com/in/adarsh-shukla30
+
+EDUCATION
+B.Tech. in Engineering Physics
+Indian Institute of Technology Roorkee (IITR)
+2022 - 2026
+Graduation CGPA/Grades: 7.1/10.0
+
+Higher Secondary
+B.B.S International School
+2017 - 2021
+High School Class 10th Percentage: 94.8%
+Intermediate Class 12th Percentage: 84.6%
+
+SKILLS & COMPETENCIES
+Programming Languages: Python (Advanced), C++ (Intermediate), JavaScript (Basic)
+Technologies & Frameworks: TensorFlow, PyTorch, Streamlit, FastAPI, Socket.IO, WebSockets, Docker
+Tools & Databases: MongoDB, SQL, Git/GitHub, AWS, GCP, Kaggle
+Areas of Expertise: Machine Learning, Deep Learning, Natural Language Processing, Computer Vision, RAG (Retrieval-Augmented Generation), Data Analysis, Statistical Modeling
+
+PROJECTS
+Multiple PDF Chatbot
+- Developed a streamlit app that allows users to chat with multiple PDFs simultaneously
+- Implemented RAG architecture with Gemini API for accurate document-based responses
+- Created vector embeddings to maintain semantic relationships between document sections
+- Optimized query routing to retrieve relevant information from large document sets
+GitHub: https://github.com/adarshukla3005/Multiple-PDF-Chatbot
+
+Cold Calling Agent Chatbot
+- Built an AI agent that automates customer qualification calls using advanced NLP
+- Implemented real-time speech-to-text and text-to-speech for natural conversations
+- Integrated conversation flow management with dynamic response generation
+- Created comprehensive call analytics and reporting system for performance tracking
+GitHub: https://github.com/adarshukla3005/Cold_Calling_Agent_Chatbot
+
+Stock Sentiment Analysis
+- Created a machine learning model to predict stock market sentiment from news headlines
+- Developed text preprocessing pipeline including tokenization, stemming and vectorization
+- Implemented and compared various classification algorithms (Naive Bayes, SVM, LSTM)
+- Achieved 86% accuracy in sentiment prediction from financial news data
+GitHub: https://github.com/adarshukla3005/Stock-Sentiment-Analysis
+
+Neural Style Transfer
+- Implemented a CNN-based neural style transfer algorithm using TensorFlow
+- Created an interface allowing users to apply artistic styles to their images
+- Optimized the algorithm for faster processing while maintaining output quality
+- Added multiple pre-trained style models for diverse artistic options
+GitHub: https://github.com/adarshukla3005/Neural-Style-Transfer
+
+Extreme Low-light Image Enhancement
+- Developed a deep learning model to enhance extremely low-light images
+- Implemented custom loss functions for improved perceptual quality
+- Created dataset augmentation techniques for better model generalization
+- Achieved significant improvement over state-of-the-art methods in PSNR metrics
+GitHub: https://github.com/adarshukla3005/Low-Light-Enhancement
+
+WORK EXPERIENCE
+Summer Intern, IIT Roorkee
+May 2023 - July 2023
+- Worked on automatic segmentation of medical images using deep learning
+- Implemented and optimized U-Net architecture for organ segmentation
+- Developed data augmentation pipeline for improved model generalization
+- Achieved 92% accuracy on test dataset, improving over baseline by 7%
+
+Financial Analyst Intern, Awesome Advertising
+July 2023 - August 2023
+- Created a financial report generator using RAG architecture
+- Automated data extraction from multiple sources for consolidated analysis
+- Developed interactive dashboards for financial performance visualization
+- Reduced manual reporting time by 75% through automation
+
+CERTIFICATIONS
+- Deep Learning Specialization - Coursera (by Andrew Ng)
+- Machine Learning - Stanford Online
+- Advanced NLP with TensorFlow - Udacity
+- AWS Cloud Practitioner - Amazon Web Services
+
+ACHIEVEMENTS
+- Top 5% in National Science Olympiad 2021
+- Runner-up in IIT Roorkee Hackathon 2023
+- 3rd place in Inter-College Coding Competition
+
+LANGUAGES
+English (Professional), Hindi (Native)
+
+INTERESTS
+AI Research, Quantum Computing, Competitive Programming, Chess 
