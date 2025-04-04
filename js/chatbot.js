@@ -12,6 +12,34 @@ document.addEventListener('DOMContentLoaded', function() {
   const API_ENDPOINT = '/.netlify/functions/chatbot';
   // Fallback endpoint in case the main one doesn't work
   const FALLBACK_ENDPOINT = '/.netlify/functions/chatbot';
+  // Test endpoint to check if Netlify functions are working
+  const TEST_ENDPOINT = '/.netlify/functions/test';
+  
+  // Test Netlify Functions when the page loads
+  testNetlifyFunctions();
+  
+  // Function to test if Netlify Functions are working
+  async function testNetlifyFunctions() {
+    try {
+      const response = await fetch(TEST_ENDPOINT);
+      if (response.ok) {
+        console.log('Netlify Functions are working correctly!');
+        const data = await response.json();
+        console.log('Test function response:', data);
+      } else {
+        console.error('Netlify Functions test failed:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error testing Netlify Functions:', error);
+    }
+  }
+  
+  // Add a welcome message when the chatbot is first opened
+  function addWelcomeMessage() {
+    if (chatbotMessages.children.length === 0) {
+      addMessage("👋 Hi there! I'm Adarsh's portfolio assistant. How can I help you today?", 'bot');
+    }
+  }
   
   // Flag to track if we should use the fallback
   let useFallbackEndpoint = false;
@@ -28,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       chatbotContainer.style.display = 'flex';
       isChatbotOpen = true;
+      addWelcomeMessage();
     });
   }
 
@@ -53,6 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Change icon to X
       chatbotFloatingButton.innerHTML = '<i class="fas fa-times"></i>';
+      
+      // Add welcome message
+      addWelcomeMessage();
     }
     
     // Generate a new session ID if none exists
@@ -182,21 +214,26 @@ document.addEventListener('DOMContentLoaded', function() {
       removeLoadingIndicator();
 
       if (!response.ok) {
+        console.error(`Network response error: ${response.status} ${response.statusText}`);
         // If the main endpoint fails, use the fallback next time
         if (!useFallbackEndpoint) {
           console.log('Switching to fallback endpoint for next request');
           useFallbackEndpoint = true;
-          throw new Error('Response not OK, switching to fallback');
+          throw new Error(`Response not OK: ${response.status} ${response.statusText}`);
         } else {
           throw new Error('Both endpoints failed');
         }
       }
 
       const data = await response.json();
+      console.log('Chatbot response data:', data);
       
       if (data.answer) {
         // Add the bot's response to the chat
         addMessage(data.answer, 'bot');
+      } else if (data.error) {
+        console.error('Error from chatbot API:', data.error);
+        addMessage(`I'm having trouble connecting right now. Error: ${data.error}`, 'bot');
       } else {
         // If no answer was provided, show an error message
         addMessage("I'm having trouble connecting right now. Please try again later.", 'bot');
@@ -208,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
       removeLoadingIndicator();
       
       // Add error message to chat
-      addMessage("I'm having trouble connecting right now. Please try again later.", 'bot');
+      addMessage(`I'm having trouble connecting right now. Please try again later.`, 'bot');
     }
   }
 

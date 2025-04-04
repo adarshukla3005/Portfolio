@@ -12,6 +12,15 @@ try {
   console.error("Error initializing Gemini client:", error.message);
 }
 
+// Hardcoded fallback information in case file reading fails
+const fallbackInfo = {
+  name: "Adarsh Shukla",
+  title: "AI/ML Engineer",
+  skills: "Machine Learning, Python, JavaScript, AI, Natural Language Processing, Computer Vision, RAG",
+  education: "B.Tech, Computer Science and Engineering",
+  experience: "3+ years of experience in AI and ML development"
+};
+
 // Load content from files
 let resumeContent = '';
 let cvContent = '';
@@ -20,14 +29,23 @@ try {
   const resumePath = path.join(__dirname, '../../adarsh_resume.md');
   if (fs.existsSync(resumePath)) {
     resumeContent = fs.readFileSync(resumePath, 'utf8');
+  } else {
+    console.log('Resume file not found, using fallback info');
+    resumeContent = JSON.stringify(fallbackInfo);
   }
   
   const cvPath = path.join(__dirname, '../../cv_extracted.txt');
   if (fs.existsSync(cvPath)) {
     cvContent = fs.readFileSync(cvPath, 'utf8');
+  } else {
+    console.log('CV file not found, using fallback info');
+    cvContent = JSON.stringify(fallbackInfo);
   }
 } catch (error) {
   console.error("Error loading content:", error);
+  // Use fallback information
+  resumeContent = JSON.stringify(fallbackInfo);
+  cvContent = JSON.stringify(fallbackInfo);
 }
 
 // Simple fallback response function
@@ -59,6 +77,18 @@ exports.handler = async function(event, context) {
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Missing query parameter' })
+      };
+    }
+
+    // Check if Gemini model is available
+    if (!geminiModel) {
+      console.error("Gemini model not initialized");
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ 
+          answer: getFallbackResponse(query),
+          error: 'Gemini API not initialized'
+        })
       };
     }
 
@@ -95,11 +125,9 @@ exports.handler = async function(event, context) {
     console.error("Error processing request:", error);
     
     return {
-      statusCode: 500,
+      statusCode: 200, // Return 200 even on error so the client doesn't show an error
       body: JSON.stringify({ 
-        error: 'Internal Server Error',
-        message: error.message,
-        answer: getFallbackResponse("error")
+        answer: `I'm having trouble connecting to my knowledge base right now. Please try again later or contact Adarsh directly.`
       })
     };
   }
