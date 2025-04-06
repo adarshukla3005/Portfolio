@@ -99,11 +99,11 @@ I am a third-year B.Tech. student majoring in Engineering Physics at IIT Roorkee
 
 ## Skills
 
-- **Data Analysis**
-- **Sentiment Analysis**
+- **Artificial Intelligence**
+- **Deep Learning**
 - **Machine Learning**
-- **BI Tools**: Microsoft Power BI, Looker, Tableau
-- **Programming & Tools**: TensorFlow, Keras, Matplotlib, Excel, Git, Google Analytics, SEO
+- **Finance**
+- **Programming & Tools**
 
 ## Experience
 
