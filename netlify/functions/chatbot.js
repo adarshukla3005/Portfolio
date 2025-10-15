@@ -135,15 +135,12 @@ try {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     console.warn("GEMINI_API_KEY is not set in environment variables");
-    throw new Error("GEMINI_API_KEY is not configured");
+  } else {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   }
-  console.log("Initializing Gemini with API key length:", apiKey.length);
-  const genAI = new GoogleGenerativeAI(apiKey);
-  geminiModel = genAI.getGenerativeModel({ model: "gemini-pro" });
-  console.log("Gemini model initialized successfully");
 } catch (error) {
   console.error("Error initializing Gemini client:", error.message);
-  console.error("Full error:", error);
 }
 
 // Function to convert markdown to HTML
@@ -227,29 +224,20 @@ exports.handler = async function(event, context) {
     If you don't know the answer to a question, politely say so rather than making up information.`;
 
     // Generate response with Gemini
-    try {
-      const result = await geminiModel.generateContent({
-        contents: [
-          { role: "user", parts: [{ text: systemPrompt }] },
-          { role: "user", parts: [{ text: query }] }
-        ],
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 800,
-        },
-      });
-
-      if (!result || !result.response) {
-        throw new Error("No response from Gemini API");
-      }
-      
-      const response = await result.response.text();
-      if (!response) {
-        throw new Error("Empty response from Gemini API");
-      }
-
-      // Convert markdown formatting to HTML
-      const formattedResponse = markdownToHtml(response);
+    const result = await geminiModel.generateContent({
+      contents: [
+        { role: "user", parts: [{ text: systemPrompt }] },
+        { role: "user", parts: [{ text: query }] }
+      ],
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 800,
+      },
+    });
+    
+    const response = result.response.text;
+    // Convert markdown formatting to HTML
+    const formattedResponse = markdownToHtml(response);
     
     return {
       statusCode: 200,
@@ -267,11 +255,4 @@ exports.handler = async function(event, context) {
       })
     };
   }
-} catch (error) {
-  console.error("Error in handler:", error);
-  return {
-    statusCode: 500,
-    body: JSON.stringify({ error: "Internal Server Error" })
-  };
-}
 }; 
