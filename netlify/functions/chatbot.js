@@ -145,7 +145,8 @@ try {
 
 // Function to convert markdown to HTML
 function markdownToHtml(text) {
-  if (!text) return '';
+  // Ensure text is a string and handle null/undefined cases
+  text = String(text || '');
   
   // Convert **bold** to <strong>bold</strong>
   text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
