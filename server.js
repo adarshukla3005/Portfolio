@@ -23,7 +23,7 @@ try {
   } else {
     console.log("Initializing Gemini model with API key");
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   }
 } catch (error) {
   console.error("Error initializing Gemini:", error);
@@ -102,8 +102,9 @@ app.post('/.netlify/functions/chatbot', async (req, res) => {
         resumeContent = JSON.stringify(fallbackInfo);
       }
       
-      if (fs.existsSync('./cv_extracted.txt')) {
-        cvContent = fs.readFileSync('./cv_extracted.txt', 'utf8');
+      const cvPath = path.join(__dirname, 'cv_extracted.txt');
+      if (fs.existsSync(cvPath)) {
+        cvContent = fs.readFileSync(cvPath, 'utf8');
       } else {
         console.log('CV file not found, using fallback');
         cvContent = JSON.stringify(fallbackInfo);
@@ -176,11 +177,11 @@ function startServer(port, attemptIndex = 0) {
       if (attemptIndex < ALTERNATIVE_PORTS.length) {
         // Try the next alternative port
         startServer(ALTERNATIVE_PORTS[attemptIndex], attemptIndex + 1);
-      } else {
+  } else {
         console.error('All ports are in use. Please close some applications and try again.');
         process.exit(1);
       }
-    } else {
+  } else {
       console.error('Server error:', err);
       process.exit(1);
     }
