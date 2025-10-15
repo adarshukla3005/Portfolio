@@ -236,9 +236,17 @@ exports.handler = async function(event, context) {
       },
     });
     
-    const response = result.response.text;
+    let responseText = '';
+    
+    // Handle the response structure from Google AI
+    if (result.response.candidates && result.response.candidates.length > 0) {
+      responseText = result.response.candidates[0].content.parts[0].text;
+    } else if (result.response.promptFeedback) {
+      throw new Error(`Text not available. Response blocked by safety settings.`);
+    }
+
     // Convert markdown formatting to HTML
-    const formattedResponse = markdownToHtml(response);
+    const formattedResponse = markdownToHtml(responseText);
     
     return {
       statusCode: 200,
