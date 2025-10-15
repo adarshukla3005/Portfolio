@@ -10,7 +10,7 @@ EDUCATION
 B.Tech. in Engineering Physics
 Indian Institute of Technology Roorkee (IITR)
 2022 - 2026
-Graduation CGPA/Grades: 7.1/10.0
+Graduation CGPA/Grades: 7.2/10.0
 
 Higher Secondary
 B.B.S International School
@@ -90,7 +90,7 @@ LANGUAGES
 English (Professional), Hindi (Native)
 
 INTERESTS
-AI Research, Quantum Computing, Competitive Programming, Chess`;
+AI Research, Quantum Computing, Competitive Programming, Chess 
 
 // Hardcoded information about Adarsh
 const adarshInfo = {
@@ -120,7 +120,7 @@ try {
     console.warn("GEMINI_API_KEY is not set in environment variables");
   } else {
     const genAI = new GoogleGenerativeAI(apiKey);
-    geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
   }
 } catch (error) {
   console.error("Error initializing Gemini client:", error.message);
