@@ -60,6 +60,12 @@ Extreme Low-light Image Enhancement
 - Achieved significant improvement over state-of-the-art methods in PSNR metrics
 GitHub: https://github.com/adarshukla3005/Low-Light-Enhancement
 
+Search Engine for Blogs and Articles | Google Developer's Club, IITR
+- Built a search engine that crawls personal blogs, filters content with ML models, and generates optimized indexes.
+- Implemented hybrid BM25 + BERT semantic search for fast, and authentic retrieval across 10,000+ crawled pages.
+- Developed a responsive web interface with query expansion, ranking boosts, relevance and optimized response time.
+GitHub: https://github.com/adarshukla3005/SearchEngine
+
 WORK EXPERIENCE
 Summer Intern, IIT Roorkee
 May 2023 - July 2023
@@ -74,6 +80,17 @@ July 2023 - August 2023
 - Automated data extraction from multiple sources for consolidated analysis
 - Developed interactive dashboards for financial performance visualization
 - Reduced manual reporting time by 75% through automation
+
+AI Developer Intern | Epilepto Systems Pvt. Ltd.
+- Worked on a Real Estate Assistant for conversational property search using AI agent and Natural Language queries.
+- Integrated RAG with Pinecone and a Twilio WhatsApp chat to deliver context-sensitive property recommendations.
+- Added user login, preference saving, history context, Real-time Web Scraping and automated document generation.
+- Developed with Streamlit and FastAPI, powered by vector search and advanced retrieval workflows from database.
+
+AI/ML Intern | Erudite IT Professional Pvt. Ltd.
+- Worked on Sports Analytics Platform integrating match data, commentary, and fan engagements for real-time insights.
+- Developed AI modules and hybrid RAG chatbot using NLP, BM25, and semantic search for context-aware sports analysis.
+- Automated content generation, commentary, and dashboards with CI/CD pipelines, PostgreSQL, and voice-enabled UI.
 
 CERTIFICATIONS
 - Deep Learning Specialization - Coursera (by Andrew Ng)
@@ -90,7 +107,7 @@ LANGUAGES
 English (Professional), Hindi (Native)
 
 INTERESTS
-AI Research, Quantum Computing, Competitive Programming, Chess 
+AI Research, Quantum Computing, Competitive Programming, Chess`;
 
 // Hardcoded information about Adarsh
 const adarshInfo = {
@@ -118,12 +135,15 @@ try {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     console.warn("GEMINI_API_KEY is not set in environment variables");
-  } else {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    throw new Error("GEMINI_API_KEY is not configured");
   }
+  console.log("Initializing Gemini with API key length:", apiKey.length);
+  const genAI = new GoogleGenerativeAI(apiKey);
+  geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  console.log("Gemini model initialized successfully");
 } catch (error) {
   console.error("Error initializing Gemini client:", error.message);
+  console.error("Full error:", error);
 }
 
 // Function to convert markdown to HTML
@@ -218,7 +238,7 @@ exports.handler = async function(event, context) {
       },
     });
     
-    const response = result.response.text();
+    const response = result.response.text;
     // Convert markdown formatting to HTML
     const formattedResponse = markdownToHtml(response);
     
